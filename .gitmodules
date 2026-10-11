@@ -6,4 +6,4 @@
 	url = https://github.com/itsPLK/ps5-elfldr.git
 [submodule "third_party/ps5-webkit-remote-loader"]
 	path = third_party/ps5-webkit-remote-loader
-	url = https://github.com/itsPLK/ps5-webkit-remote-loader.git
+	url = https://github.com/tomchapin/ps5-webkit-remote-loader.git

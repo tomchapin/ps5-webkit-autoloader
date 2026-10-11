@@ -17,6 +17,9 @@ frontend/dist/
 # Build inputs, standalone HTML, host and packaging outputs
 build/
 dist/
+dist-build/
+dist-review/
+.concord/
 webkit-autoloader-host.py
 webkit-autoloader-host_v*.py
 webkit-autoloader-host.exe

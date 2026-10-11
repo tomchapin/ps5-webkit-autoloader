@@ -34,6 +34,22 @@ There are two ways to set up the autoloader, depending on whether you're already
 3. The installer opens the browser to cache the autoloader page (choose Poops or Relapse if prompted), creates the **WebKit Autoloader** app on the homescreen, and exits.
 4. **Reboot once**, then launch **WebKit Autoloader** from the homescreen.
 
+For troubleshooting, run the PC host with `--verbose`. It saves timestamped logs
+to `ps5-host.log` beside the host by default; `--log-file PATH` selects another
+location. Logs include DNS client addresses, TLS handshakes, HTTP paths, Host and
+Referer headers, firmware routing, and served page sizes. Newly built PC host pages
+also report their address, link destinations, console output, and browser errors
+to the host. Cached pages from older builds do not contain this instrumentation.
+Log files rotate at 5 MB with three backups.
+TCP arrivals are logged before TLS/HTTP parsing, with handshake failures and
+connection durations. DNS logs include malformed packets and query types;
+30-second summaries show activity counts and the last client for each protocol.
+Use `--http-port 80` to also observe plain HTTP requests from User's Guide.
+DNS normally binds exclusively. If Windows Internet Connection Sharing occupies
+port 53, a diagnostic run can use `--dns-bind YOUR_PC_IP --share-dns-port`.
+This requires a specific local address; confirm the PS5's queries appear in the
+log because shared-port delivery is not guaranteed.
+
 ### Not jailbroken yet
 
 If you aren't jailbroken yet, you'll need to host the exploit locally on your PC for the initial setup:
@@ -73,6 +89,14 @@ For a fixed, automated payload chain, you can configure payloads manually:
 > **Note:** When an `autoload.txt` config is found, Payload Manager is **not** launched automatically. If you also want Payload Manager available, place `pldmgr.elf` in your `ps5_autoloader` directory and add it to `autoload.txt`.
 
 ## Additional Info
+
+### Running PS5SX2 after the jailbreak
+
+PS5SX2 needs its app files, ShadowMountPlus and an app-elevation helper in addition
+to the console jailbreak. See [PS5SX2 setup and startup diagnosis](docs/ps5sx2.md)
+(AI-assisted) for the verified installation, the separate-helper workaround for
+an AIO black screen, and the BIOS/game paths. The WebKit host's DNS/HTTP logs
+diagnose browser delivery; PS5SX2's own startup logs diagnose its app launch.
 
 <Details>
 <Summary><i>How to update the autoloader?</i></Summary>

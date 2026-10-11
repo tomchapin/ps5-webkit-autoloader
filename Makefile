@@ -125,10 +125,10 @@ host: $(HOST_PAYLOAD) payload-deps assets/icon.ico
 	@mkdir -p build/host
 	$(PYTHON) tools/gen_version.py --page-config $(PAGE_CONFIG)
 	$(BUILDER) $(CURDIR)/payloads/elfldr-check.js payloads/relapse.js $(CURDIR)/payloads/autoload.js::$(HOST_PAYLOAD_VIRTUAL) \
-	    --title "$(BUILD_TITLE)" $(PAGE_FLAGS) \
+	    --title "$(BUILD_TITLE)" $(PAGE_FLAGS) --js $(CURDIR)/frontend/autoloader/diagnostics.js \
 	    --embed $(HOST_PAYLOAD_VIRTUAL)=$(HOST_PAYLOAD) -o $(CURDIR)/$(HOST_RELAPSE)
 	$(BUILDER) $(CURDIR)/payloads/elfldr-check.js payloads/poops.js $(CURDIR)/payloads/autoload.js::$(HOST_PAYLOAD_VIRTUAL) \
-	    --title "$(BUILD_TITLE)" $(PAGE_FLAGS) \
+	    --title "$(BUILD_TITLE)" $(PAGE_FLAGS) --js $(CURDIR)/frontend/autoloader/diagnostics.js \
 	    --embed $(HOST_PAYLOAD_VIRTUAL)=$(HOST_PAYLOAD) -o $(CURDIR)/$(HOST_POOPS)
 	$(PYTHON) $(LOADER)/tools/build_host.py \
 	    --page index.html=$(HOST_RELAPSE) \
