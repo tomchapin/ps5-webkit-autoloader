@@ -24,11 +24,12 @@ documentation changes are published.
 - Keep the usual jailbreak's kstuff and ShadowMountPlus available.
 - Place the app at `/data/homebrew/PPSA99203/` and resources at `/data/PCSX2/`.
   Wait for ShadowMountPlus's successful registration notification/log entry.
-- For the verified workaround, load `PS5SXHelper.elf` once after the jailbreak
-  and before opening PS5SX2. Reload it after a console restart. It is saved at
+- For the verified workaround, run `PS5SXHelper.elf` once after the jailbreak
+  and before opening PS5SX2. It must run again after a console restart and is
+  saved at
   `/data/pldmgr/payloads/PS5SX2/PS5SXHelper.elf` in the tested installation.
-  Automatic startup was subsequently prepared in etaHEN as described below;
-  the next fresh boot still needs to verify it.
+  Automatic startup was subsequently configured and verified in etaHEN as
+  described below; the saved startup chain loads it after each restart.
 - Use Payload Manager for an ELF loader limited to localhost. Sending from a
   PC to port 9021 worked with the LAN-accessible loader in this session; it is
   not guaranteed by the WebKit Autoloader's default localhost-only loader.
@@ -47,17 +48,24 @@ Launch this PS2 ELF from PS5SX2's shelf, not the PS5 payload loader.
 
 ## After a full restart
 
-Start **Media → WebKit Autoloader**, wait for the exploit to finish, then open
-Payloads / Payload Manager and load the same experimental etaHEN payload once.
+Start **Media → WebKit Autoloader**, wait for the exploit to finish, then let
+Payload Manager's 10-second autoload countdown run. It is configured to send
+the saved `etaHEN-11.00-13.60.elf` automatically. The original `etaHEN_2.5B.bin`
+from the default repository failed to start its services in the reboot test;
+that is a different HEN build.
 The autoloader completing does not mean that the HEN and app helper are running.
 Use the PC host/DNS/User's Guide route as a fallback if the Media launcher fails.
 
 ShadowMountPlus and the separate helper were copied to `/data/etaHEN/payloads/`
 with empty sibling `.elf.auto_start` files. The running etaHEN port supports
 those startup markers. Both copies passed ELF validation and SHA-256 readback;
-automatic startup after a fresh boot remains to verify. Wait for etaHEN and
-the helper to finish starting before opening PS5SX2. Do not manually launch
-duplicate copies during the verification boot.
+automatic startup passed a fresh-boot test. Payload Manager history contained
+only the matching HEN, whose bootstrap discovered both plugins. ShadowMountPlus
+and the helper were running automatically. The new PS5SX2 PID 98 received root
+17 ms after its request, passed the JIT probe and drew its interface after
+653 ms; the companion API reported `mode: menu`, and the user confirmed success.
+Wait for etaHEN and the helper notification before opening PS5SX2. Do not
+manually launch duplicate payloads when the saved chain is running.
 
 See the [etaHEN startup guide](https://github.com/tomchapin/etaHEN/blob/main/docs/ps5sx2-autostart.md)
 for exact paths, version distinctions and rollback. The fork's original HEN
