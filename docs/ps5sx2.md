@@ -27,7 +27,8 @@ documentation changes are published.
 - For the verified workaround, load `PS5SXHelper.elf` once after the jailbreak
   and before opening PS5SX2. Reload it after a console restart. It is saved at
   `/data/pldmgr/payloads/PS5SX2/PS5SXHelper.elf` in the tested installation.
-  No automatic-loading config was changed or tested.
+  Automatic startup was subsequently prepared in etaHEN as described below;
+  the next fresh boot still needs to verify it.
 - Use Payload Manager for an ELF loader limited to localhost. Sending from a
   PC to port 9021 worked with the LAN-accessible loader in this session; it is
   not guaranteed by the WebKit Autoloader's default localhost-only loader.
@@ -43,6 +44,24 @@ was copied to `/data/PCSX2/games/dungeon_game.elf` and detected by PS5SX2's
 companion game list. The transfer matched by SHA-256, and a short launch test
 logged about 60 fps at 100% emulation speed. Extended gameplay was not checked.
 Launch this PS2 ELF from PS5SX2's shelf, not the PS5 payload loader.
+
+## After a full restart
+
+Start **Media → WebKit Autoloader**, wait for the exploit to finish, then open
+Payloads / Payload Manager and load the same experimental etaHEN payload once.
+The autoloader completing does not mean that the HEN and app helper are running.
+Use the PC host/DNS/User's Guide route as a fallback if the Media launcher fails.
+
+ShadowMountPlus and the separate helper were copied to `/data/etaHEN/payloads/`
+with empty sibling `.elf.auto_start` files. The running etaHEN port supports
+those startup markers. Both copies passed ELF validation and SHA-256 readback;
+automatic startup after a fresh boot remains to verify. Wait for etaHEN and
+the helper to finish starting before opening PS5SX2. Do not manually launch
+duplicate copies during the verification boot.
+
+See the [etaHEN startup guide](https://github.com/tomchapin/etaHEN/blob/main/docs/ps5sx2-autostart.md)
+for exact paths, version distinctions and rollback. The fork's original HEN
+binary was not deployed over the working experimental port.
 
 ## Distinguish browser delivery from app startup
 
