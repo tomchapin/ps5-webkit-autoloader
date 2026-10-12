@@ -46,7 +46,7 @@
     }
   }, true);
   var output = document.getElementById('console');
-  if (output) {
+  if (output && typeof MutationObserver !== 'undefined') {
     var observer = new MutationObserver(function (records) {
       var changed = [];
       records.forEach(function (mutation) {
@@ -64,6 +64,6 @@
     observer.observe(output, { childList: true, subtree: true, characterData: true });
   }
   record('page', location.href + ' | ' + document.title + ' | ' + navigator.userAgent);
-  setInterval(flush, 1500);
+  if (typeof setInterval !== 'undefined') setInterval(flush, 1500);
   flush();
 }());

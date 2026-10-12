@@ -106,6 +106,10 @@ The autoloader content is cached on the console, so updating is exactly the same
 The latest installer payload will re-create the homescreen app and refresh the cached page for you. Your payloads and `autoload.txt` on USB / internal storage are never touched.
 </Details>
 
+If the ELF loader is already running but Payload Manager is unavailable, see the
+[Payload Manager recovery guide](docs/payload-manager-recovery.md) (AI-assisted).
+It also explains the separate full-startup page needed after a console restart.
+
 <Details>
 <Summary><i>How to use a custom ELF Loader?</i></Summary>
 
